@@ -19,6 +19,8 @@ from . import views
 
 urlpatterns = [
 
-    #corremos nuestra pagina
-    path('hello-world',views.hello_world)
+    #corremos nuestra paginas aqui
+    path('hello-world/',views.hello_world),
+    path('Hi/', views.hi),
+    path('NNN/', views.numeros),
 ]
