@@ -15,14 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.http import HttpResponse
-
-#creamos nuestra primera pagina
-def hello_world(request):
-    return HttpResponse("Hello World!")
+from . import views
 
 urlpatterns = [
 
     #corremos nuestra pagina
-    path('hello-world',hello_world)
+    path('hello-world',views.hello_world)
 ]
