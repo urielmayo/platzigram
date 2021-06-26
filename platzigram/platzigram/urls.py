@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . import views as local_views
+from posts import views as posts_views
 
 urlpatterns = [
 
     #corremos nuestra paginas aqui
-    path('hello-world/',views.hello_world),
-    path('sorted-numbers/', views.sorted_numbers),
-    path('hi/<str:name>/<int:age>',views.hi)
+    path('hello-world/',local_views.hello_world),
+    path('sorted-numbers/', local_views.sorted_numbers),
+    path('hi/<str:name>/<int:age>',local_views.hi),
+
+    path('posts/',posts_views.list_posts),
 ]
