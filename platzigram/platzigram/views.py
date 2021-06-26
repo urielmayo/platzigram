@@ -32,3 +32,11 @@ def sorted_numbers(request):
         content_type = 'application/json'
     )
     '''
+
+def hi(request,age,name):
+    if age < 18:
+        message = f'We are sorry {name}, you are not allowed to enter to this web page'
+    else:
+        message = f'Hi {name}, welcome to our site'
+
+    return HttpResponse(message)

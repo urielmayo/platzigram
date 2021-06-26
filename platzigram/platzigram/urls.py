@@ -22,4 +22,5 @@ urlpatterns = [
     #corremos nuestra paginas aqui
     path('hello-world/',views.hello_world),
     path('sorted-numbers/', views.sorted_numbers),
+    path('hi/<str:name>/<int:age>',views.hi)
 ]
