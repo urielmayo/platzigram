@@ -1,39 +1,47 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-
+fragrances = [
+    {
+        'brand':'Versace',
+        'name': 'Eros',
+        'type': 'Eau de Toilette',
+        'picture': 'https://fimgs.net/mdimg/perfume/375x500.16657.jpg',
+    },
+    {
+        'brand':'Dior',
+        'name': 'Sauvage',
+        'type': 'Eau de Parfum',
+        'picture': 'https://perfumeriaspigmento.com.ar/media/catalog/product/cache/image/620x678/e9c3970ab036de70892d86c6d221abfe/3/3/3348901368247_100ml_1.jpg',
+    },
+    {
+        'brand':'Armani',
+        'name': 'Armani Code Profumo',
+        'type': 'Eau de Parfum',
+        'picture': 'https://fimgs.net/mdimg/perfume/375x500.34761.jpg',
+    },
+]
 
 # Create your views here.
 def list_posts(request):
     """list existing posts"""
     #example
-    fragrances = [
-    {
-        'Brand':'Versace',
-        'Name': 'Eros',
-        'Type': 'Eau de Toilette',
-        'Picture': 'https://fimgs.net/mdimg/perfume/375x500.16657.jpg',
-    },
-    {
-        'Brand':'Dior',
-        'Name': 'Sauvage',
-        'Type': 'Eau de Parfum',
-        'Picture': 'https://perfumeriaspigmento.com.ar/media/catalog/product/cache/image/620x678/e9c3970ab036de70892d86c6d221abfe/3/3/3348901368247_100ml_1.jpg',
-    },
-    {
-        'Brand':'Armani',
-        'Name': 'Code Profumo',
-        'Type': 'Eau de Parfum',
-        'Picture': 'https://fimgs.net/mdimg/perfume/375x500.34761.jpg',
-    },
-]
+
     content = []
     
     for fragrance in fragrances:
         content.append(f"""
-            <p><strong> {fragrance['Brand']} </strong></p>
-            <p><small> {fragrance['Name']} - {fragrance['Type']}</small></p>
-            <figure><img src="{fragrance['Picture']}"/></figure>
+            <p><strong> {fragrance['brand']} </strong></p>
+            <p><small> {fragrance['name']} - {fragrance['type']}</small></p>
+            <figure><img src="{fragrance['picture']}"/></figure>
         """)
     
     return HttpResponse(content)
+
+#funcion de ejemplo que retorna un template
+def run_template(request):
+
+    context ={
+        'fragrances': fragrances,
+    }
+    return render(request, 'feed.html',{'fragrances': fragrances})

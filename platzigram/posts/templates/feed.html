@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PlatziGram</title>
+</head>
+<body>
+    {% for fragrance in fragrances %}
+        <p><strong> {{ fragrance.name}} </strong></p>
+        <p><small>{{fragrance.brand}}</small></p>
+    {% endfor %}
+</body>
+</html>

@@ -26,4 +26,5 @@ urlpatterns = [
     path('hi/<str:name>/<int:age>',local_views.hi),
 
     path('posts/',posts_views.list_posts),
+    path('run-template/',posts_views.run_template)
 ]
