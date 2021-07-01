@@ -20,6 +20,7 @@ from posts import views as posts_views
 
 urlpatterns = [
 
+    path('admin/',admin.site.urls),
     #corremos nuestra paginas aqui
     path('hello-world/',local_views.hello_world),
     path('sorted-numbers/', local_views.sorted_numbers),
