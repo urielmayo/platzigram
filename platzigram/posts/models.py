@@ -3,13 +3,20 @@ from django.db import models
 # Create your models here.
 class User(models.Model):
 
+    COUNTRIES = (
+        ('COL','Colombia'),
+        ('BRA','Brazil'),
+        ('MEX','Mexico'),
+        ('CHL','Chile'),
+        ('NLD','Netherlands'),
+    )
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     
-    country = models.CharField(max_length=30, null=True)
+    country = models.CharField(max_length=3, choices=COUNTRIES, default='')
     
     is_admin = models.BooleanField(default=False)
 
