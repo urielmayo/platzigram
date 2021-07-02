@@ -1,6 +1,8 @@
 #Django
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 #Datetime
 from datetime import datetime
 import json
@@ -40,3 +42,7 @@ def hi(request,age,name):
         message = f'Hi {name}, welcome to our site'
 
     return HttpResponse(message)
+
+#@login_required
+def go_to_login(request):
+    return redirect('feed')

@@ -26,6 +26,7 @@ urlpatterns = [
 
     path('admin/',admin.site.urls),
     #corremos nuestra paginas aqui
+    path('',local_views.go_to_login),
     path('hello-world/',local_views.hello_world),
     path('sorted-numbers/', local_views.sorted_numbers),
     path('hi/<str:name>/<int:age>',local_views.hi),
@@ -37,5 +38,6 @@ urlpatterns = [
     path('users/login/',login_views.login_view, name='login'),
     path('users/logout/',login_views.logout_view, name ='logout'),
     path('users/signup/',login_views.signup_view, name = 'signup'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
