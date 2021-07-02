@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 fragrances = [
     {
@@ -70,9 +71,10 @@ def list_posts(request):
     return HttpResponse(content)
 
 #funcion de ejemplo que retorna un template
-def run_template(request):
+@login_required
+def list_posts(request):
 
     contexto ={
         'posts': posts,
     }
-    return render(request, 'feed.html',context=contexto)
+    return render(request, 'posts/feed.html',context=contexto)

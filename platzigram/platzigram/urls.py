@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 from . import views as local_views
 from posts import views as posts_views
+from users import views as login_views
 
 urlpatterns = [
 
@@ -29,6 +30,7 @@ urlpatterns = [
     path('sorted-numbers/', local_views.sorted_numbers),
     path('hi/<str:name>/<int:age>',local_views.hi),
 
-    path('posts/',posts_views.list_posts),
-    path('run-template/',posts_views.run_template)
+    path('posts/',posts_views.list_posts, name = 'feed'),
+    path('users/login/',login_views.login_view, name='login'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
