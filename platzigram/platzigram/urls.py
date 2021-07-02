@@ -30,7 +30,12 @@ urlpatterns = [
     path('sorted-numbers/', local_views.sorted_numbers),
     path('hi/<str:name>/<int:age>',local_views.hi),
 
+    #posts views
     path('posts/',posts_views.list_posts, name = 'feed'),
+    
+    #users views
     path('users/login/',login_views.login_view, name='login'),
+    path('users/logout/',login_views.logout_view, name ='logout'),
+    path('users/signup/',login_views.signup_view, name = 'signup'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
