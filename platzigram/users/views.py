@@ -1,14 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 
 from users.models import Profile
 
 # Create your views here.
 def login_view(request):
-    
+    """login view"""
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -29,10 +29,12 @@ def login_view(request):
 
 @login_required
 def logout_view(request):
+    """logout view"""
     logout(request)
     return redirect('login')
 
 def signup_view(request):
+    """signup view"""
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -62,3 +64,15 @@ def signup_view(request):
 
 
     return render(request, 'users/signup.html')
+
+@login_required
+def update_profile(request):
+    """update profile data view"""
+    profile = request.user.profile
+
+    context = {
+        'profile':profile,
+        'user': request.user,
+    }
+
+    return render(request, 'users/update_profile.html',context=context)
