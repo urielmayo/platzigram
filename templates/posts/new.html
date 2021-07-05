@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block head_content %}
+<title>@{{user.username}} | New Post</title>
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-6 pt-3 pb-3" id="profile-box">
+                <h4 class="mb-4">Post a new photo!</h4>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% for error in form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for hola in error %}
+                                {{ hola }}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    <input type="hidden" name="user" value="{{ user.pk}}"/>
+                    <input type="hidden" name="profile" value="{{ profile.pk}}"/>
+
+                    {# title field #}
+                    <div class="form-group">
+                        <input
+                            class="form-control {% if form.title.errors %}is-invalid{% endif %}"
+                            type="text"
+                            name="title"
+                            placeholder="Title"
+                            value="{% if form.errors %}{{ form.title.value }}{% else %}{{ profile.title }}{% endif %}"
+                        >
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}{{error}}{% endfor %}
+                        </div>
+                    </div>
+
+                    {# photo field #}
+                    <div class="form-group">
+                        <input
+                            class="form-control {% if form.photo.errors %}is-invalid{% endif %}"
+                            type="file"
+                            name="photo"
+                            placeholder="Photo"
+                            value="{% if form.errors %}{{ form.photo.value }}{% else %}{{ profile.photo }}{% endif %}"
+                        >
+                        <div class="invalid-feedback">
+                            {% for error in form.photo.errors %}{{error}}{% endfor %}
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

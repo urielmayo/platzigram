@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
+from posts.forms import PostForm
+
 posts = [
     {
         'title': 'Mont Blanc',
@@ -42,3 +44,21 @@ def list_posts(request):
         'profile':request.user.profile
     }
     return render(request, 'posts/feed.html',context=contexto)
+
+@login_required
+def create_post(request):
+    
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = PostForm()
+
+    context = {
+        'form':form,
+        'user':request.user,
+        'profile':request.user.profile,
+    }
+
+    return render(request, 'posts/new.html',context=context)

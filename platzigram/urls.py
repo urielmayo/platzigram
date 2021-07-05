@@ -26,13 +26,13 @@ urlpatterns = [
 
     path('admin/',admin.site.urls),
     #corremos nuestra paginas aqui
-    path('',local_views.go_to_login),
     path('hello-world/',local_views.hello_world),
     path('sorted-numbers/', local_views.sorted_numbers),
     path('hi/<str:name>/<int:age>',local_views.hi),
 
     #posts views
-    path('posts/',posts_views.list_posts, name = 'feed'),
+    path('',posts_views.list_posts, name = 'feed'),
+    path('posts/new/',posts_views.create_post, name='create_post'),
     
     #users views
     path('users/login/',login_views.login_view, name='login'),
