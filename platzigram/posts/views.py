@@ -76,5 +76,6 @@ def list_posts(request):
 
     contexto ={
         'posts': posts,
+        'profile':request.user.profile
     }
     return render(request, 'posts/feed.html',context=contexto)
