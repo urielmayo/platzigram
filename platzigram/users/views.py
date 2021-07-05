@@ -1,9 +1,14 @@
+#django modules
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
+#models
 from users.models import Profile
+
+#forms
+from users.forms import ProfileForm
 
 # Create your views here.
 def login_view(request):
@@ -69,10 +74,27 @@ def signup_view(request):
 def update_profile(request):
     """update profile data view"""
     profile = request.user.profile
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.cleaned_data
 
-    context = {
+            profile.website = data['website']
+            profile.biography = data['biography']
+            profile.phone_number = data['phone_number']
+            profile.profile_picture = data['profile_picture']
+            profile.save()
+
+            return redirect('update_profile')
+    else:
+        form = ProfileForm()
+
+    return render(
+        request,
+        'users/update_profile.html',
+        context={
         'profile':profile,
         'user': request.user,
-    }
-
-    return render(request, 'users/update_profile.html',context=context)
+        'form': form,
+        },
+    )

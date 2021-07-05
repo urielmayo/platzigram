@@ -7,3 +7,4 @@ __pycache__
 platzigram/db.sqlite3
 
 *.jpg
+*.jpeg

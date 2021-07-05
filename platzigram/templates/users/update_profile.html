@@ -16,7 +16,7 @@
           {% csrf_token %}
 
           {% if form.errors %}
-            <p class="alert alert-danger">{{ form.error }}</p>
+            <p class="alert alert-danger">{{ form.errors }}</p>
           {% endif %}
 
           <div class="media">
@@ -28,7 +28,7 @@
 
             <div class="media-body">
             <h5 class="ml-4">@{{ user.username }} | {{ user.get_full_name }}</h5>
-            <p class="ml-4"><input type="file" name="picture" required="true"></p>
+            <p class="ml-4"><input type="file" name="profile_picture" required="true"></p>
             </div>
           </div>
 
