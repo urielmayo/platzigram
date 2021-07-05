@@ -4,7 +4,7 @@ venv
 
 __pycache__
 
-platzigram/db.sqlite3
+*.sqlite3
 
 *.jpg
 *.jpeg
