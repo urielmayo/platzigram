@@ -15,11 +15,6 @@
         <form action="{% url 'update_profile' %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
 
-          {# shows form errors #}
-          {% if form.errors %}
-            <p class="alert alert-danger">{{ form.errors }}</p>
-          {% endif %}
-
           {# profile picture field #}
           <div class="media">
             {% if profile.profile_picture %}
