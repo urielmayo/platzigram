@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
 from posts.forms import PostForm
+from posts.models import Post
 
 posts = [
     {
@@ -35,16 +36,18 @@ posts = [
     }
 ]
 
-#funcion de ejemplo que retorna un template
+#feed view
 @login_required
 def list_posts(request):
 
-    contexto ={
+    posts = Post.objects.all().order_by('-created')
+
+    contexto = {
         'posts': posts,
-        'profile':request.user.profile
     }
     return render(request, 'posts/feed.html',context=contexto)
 
+#new view
 @login_required
 def create_post(request):
     
@@ -52,6 +55,7 @@ def create_post(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            return redirect('feed')
     else:
         form = PostForm()
 

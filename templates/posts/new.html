@@ -30,7 +30,6 @@
                             type="text"
                             name="title"
                             placeholder="Title"
-                            value="{% if form.errors %}{{ form.title.value }}{% else %}{{ profile.title }}{% endif %}"
                         >
                         <div class="invalid-feedback">
                             {% for error in form.title.errors %}{{error}}{% endfor %}
@@ -44,13 +43,14 @@
                             type="file"
                             name="photo"
                             placeholder="Photo"
-                            value="{% if form.errors %}{{ form.photo.value }}{% else %}{{ profile.photo }}{% endif %}"
                         >
                         <div class="invalid-feedback">
                             {% for error in form.photo.errors %}{{error}}{% endfor %}
                         </div>
                     </div>
 
+                    {# submit button #}
+                    <button type="submit" class="btn btn-primary btn-block mt-5">Publish</button>
                 </form>
             </div>
         </div>

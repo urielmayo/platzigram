@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg fixed-top" id="main-navbar">
     <div class="container">
 
-        <a class="navbar-brand pr-5" style="border-right: 1px solid #efefef;" href="">
+        <a class="navbar-brand pr-5" style="border-right: 1px solid #efefef;" href="{% url 'feed' %}">
             <img src="{% static "img/instagram.png" %}" height="45" class="d-inline-block align-top"/>
         </a>
 
@@ -11,8 +11,8 @@
 
                 <li class="nav-item">
                     <a href="">
-                        {% if profile.profile_picture %}
-                        <img src="{{ profile.profile_picture.url }}" class="rounded-circle" height="50" />
+                        {% if request.user.profile.profile_picture %}
+                        <img src="{{ request.user.profile.profile_picture.url }}" class="rounded-circle" height="50" />
                         {% else %}
                         <img src="{% static 'img/default-profile.png' %}" class="rounded-circle" height="50" />
                         {% endif %}
