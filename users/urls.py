@@ -1,9 +1,19 @@
+#Django modules
 from django.urls import path
+from django.views.generic import TemplateView
 
 from users import views
 
 urlpatterns = [
 
+    #posts
+    path(
+        route='profile/<str:username>/',
+        view=views.UserDetailView.as_view(),
+        name='detail'
+    ),
+
+    #users
     path(
         route='login/',
         view=views.login_view,
