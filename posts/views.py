@@ -1,14 +1,19 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
 from posts.forms import PostForm
 from posts.models import Post
 
-
+#post detail view
+class PostDetailView(LoginRequiredMixin, DetailView):
+    
+    template_name= 'posts/detail.html'
+    model = Post
+    context_object_name = 'post'
 
 #feed view
 class PostsFeedView(LoginRequiredMixin, ListView):
@@ -19,6 +24,7 @@ class PostsFeedView(LoginRequiredMixin, ListView):
     ordering = ('-created',)
     paginate_by = 2
     context_object_name = 'posts'
+
 
 #new view
 @login_required
