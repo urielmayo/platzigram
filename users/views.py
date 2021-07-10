@@ -1,17 +1,14 @@
 #django modules
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
 from django.views.generic import DetailView, FormView, UpdateView
-from django.urls import reverse, reverse_lazy
 from django.contrib.auth import views as auth_views
+from django.urls import reverse, reverse_lazy
 
 #django models
 from django.contrib.auth.models import User
 
 #forms
-from users.forms import ProfileForm, SignUpForm
+from users.forms import SignUpForm
 
 #project models
 from posts.models import Post
