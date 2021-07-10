@@ -9,9 +9,14 @@
         <div class="row">
 
             {% for post in posts %}
+                {# showing everypost using the postcard template#}
                 {% include 'posts/postcard.html' %}
             {% endfor %}
             
         </div>
     </div>
+
+    {# adding pagintation fro multiple pages of posts#}
+    {% include 'pagination.html' %}
+
 {% endblock %}
