@@ -6,8 +6,8 @@
 
 {% block container %}
 
-    {% if error %}
-        <p class="alert alert-danger">{{error}}</p>
+    {% if form.errors %}
+        <p class="alert alert-danger"> Invalid Username or Password. Please Try Again</p>
     {% endif %}
     <h1 style="text-align: center;">Sign In</h1>
 

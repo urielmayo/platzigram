@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, FormView, UpdateView
 from django.urls import reverse, reverse_lazy
+from django.contrib.auth import views as auth_views
 
 #django models
 from django.contrib.auth.models import User
@@ -17,32 +18,12 @@ from posts.models import Post
 from users.models import Profile
 
 # Create your views here.
-def login_view(request):
-    """login view"""
+class LoginView(auth_views.LoginView):
+    """Login View Class"""
+    template_name = 'users/login.html'
 
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        
-        user = authenticate(request, username = username, password = password)
-        
-        if user:
-            login(request, user)
-            return redirect('posts:feed')
-        else:
-            error_context = {
-                'error': 'Invalid username or password. Try Again Please',
-                'retry_username': username
-            }
-            return render(request, 'users/login.html',context = error_context)
-        
-    return render(request, 'users/login.html')
-
-@login_required
-def logout_view(request):
-    """logout view"""
-    logout(request)
-    return redirect('users:login')
+class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
+    """Logout View Class"""
 
 class UpdateProfileView(LoginRequiredMixin, UpdateView):
 
