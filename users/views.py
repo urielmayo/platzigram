@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView, FormView
+from django.views.generic import DetailView, FormView, UpdateView
 from django.urls import reverse, reverse_lazy
 
 #django models
@@ -14,6 +14,7 @@ from users.forms import ProfileForm, SignUpForm
 
 #project models
 from posts.models import Post
+from users.models import Profile
 
 # Create your views here.
 def login_view(request):
@@ -43,38 +44,31 @@ def logout_view(request):
     logout(request)
     return redirect('users:login')
 
-@login_required
-def update_profile(request):
-    """update profile data view"""
-    profile = request.user.profile
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
-        if form.is_valid():
-            data = form.cleaned_data
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
 
-            profile.website = data['website']
-            profile.biography = data['biography']
-            profile.phone_number = data['phone_number']
-            profile.profile_picture = data['profile_picture']
-            profile.save()
+    template_name = 'users/update_profile.html'
+    model = Profile
+    fields = [
+        'website',
+        'biography',
+        'phone_number',
+        'profile_picture',
+    ]
 
-            return redirect(
-                reverse('users:detail',
-                kwargs ={'username':request.user.username}
-                )
-            )
-    else:
-        form = ProfileForm()
+    def get_object(self):
+        """returns User's profile"""
+        return self.request.user.profile
+    
+    def get_success_url(self):
+        
+        username = self.object.user.username
+        return reverse(
+            'users:detail',
+            kwargs= {
+                'username':username
+            }
+        )
 
-    return render(
-        request,
-        'users/update_profile.html',
-        context={
-        'profile':profile,
-        'user': request.user,
-        'form': form,
-        },
-    )
 
 class UserDetailView(LoginRequiredMixin, DetailView):
 

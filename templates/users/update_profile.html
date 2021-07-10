@@ -15,7 +15,7 @@
         <form action="{% url 'users:update_profile' %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
 
-          {# profile picture field #}
+          {# profile profile_picture field #}
           <div class="media">
             {% if profile.profile_picture %}
             <img src="{{ profile.profile_picture.url }}" class="rounded-circle" height="50" />
@@ -31,7 +31,7 @@
           
           {% for error in form.profile_picture.errors %}
           <div class="alert alert-danger">
-            <b>Picture: </b> {{ error }}
+            <b>profile_picture: </b> {{ error }}
           </div>
           {% endfor %}
 

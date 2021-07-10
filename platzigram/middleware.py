@@ -5,7 +5,7 @@ from users.models import Profile
 
 class ProfileCompletionMiddleware:
     """
-    Ensures everyuser has a picture
+    Ensures everyuser has a profile_picture
     """
     def __init__(self,get_response):
         self.get_response = get_response

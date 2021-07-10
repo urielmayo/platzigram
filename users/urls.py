@@ -28,7 +28,7 @@ urlpatterns = [
 
     path(
         route='users/me/profile',
-        view=views.update_profile,
+        view=views.UpdateProfileView.as_view(),
         name='update_profile'
     ),
     #posts
