@@ -15,7 +15,8 @@ class Profile(models.Model):
         blank=True,
         null =True
     )
-
+    follows = models.ManyToManyField('Profile', related_name='followed_by')
+    
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

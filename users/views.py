@@ -3,7 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, FormView, UpdateView
 from django.contrib.auth import views as auth_views
 from django.urls import reverse, reverse_lazy
-
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 #django models
 from django.contrib.auth.models import User
 
@@ -73,5 +74,12 @@ class SignUpView(FormView):
         form.save()
         return super().form_valid(form)
 
-    
+@login_required
+def list_followers(request):
+    following_list = request.user.profile.follows.all()
+    context = {
+        'following_list':following_list
+    }
+
+    return render(request,'users/followers.html',context=context)
     

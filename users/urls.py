@@ -31,6 +31,11 @@ urlpatterns = [
         view=views.UpdateProfileView.as_view(),
         name='update_profile'
     ),
+    path(
+        route='me/followers',
+        view=views.list_followers,
+        name='list_followers'
+    ),
     #posts
     path(
         route='<str:username>/',
