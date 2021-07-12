@@ -1,10 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse, reverse_lazy
-
+from django.contrib.auth.decorators import login_required
 from posts.forms import PostForm
 from posts.models import Post
-
+from django.shortcuts import redirect
 #post detail view
 class PostDetailView(LoginRequiredMixin, DetailView):
     
@@ -34,3 +34,16 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         context['user'] = self.request.user
         context['profile'] = self.request.user.profile
         return context
+
+@login_required
+def liked_photo(request, post_pk):
+    post = Post.objects.get(pk = post_pk)
+    liked_users = post.liked.all()
+    print(liked_users)
+    profile = request.user.profile
+
+    if profile not in liked_users:
+        post.liked.add(profile)
+    else:
+        post.liked.remove(profile)
+    return redirect('posts:feed')

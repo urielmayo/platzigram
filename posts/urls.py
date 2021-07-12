@@ -20,5 +20,11 @@ urlpatterns = [
         route='posts/<int:pk>/',
         view=views.PostDetailView.as_view(),
         name='detail'
-    )
+    ),
+
+    path(
+        route='posts/liked/<int:post_pk>/',
+        view=views.liked_photo,
+        name='liked_photo'
+    ),
 ]
