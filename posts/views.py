@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from posts.forms import PostForm
 from posts.models import Post
 from django.shortcuts import redirect
+
+from users.models import Profile
 #post detail view
 class PostDetailView(LoginRequiredMixin, DetailView):
     
@@ -18,9 +20,15 @@ class PostsFeedView(LoginRequiredMixin, ListView):
 
     template_name = 'posts/feed.html'
     model = Post
-    ordering = ('-created',)
-    paginate_by = 5
     context_object_name = 'posts'
+
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        profile_followers = context['view'].request.user.profile.follows.all()
+        context['posts'] = Post.objects.filter(profile__in= profile_followers).order_by('-created')
+        return context
+    
 
 #new post
 class CreatePostView(LoginRequiredMixin, CreateView):

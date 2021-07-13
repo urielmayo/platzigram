@@ -57,7 +57,7 @@ class ProfileAdmin(admin.ModelAdmin):
             }
         ),
         ('Metadata', {
-            'fields': (('created', 'modified'),),
+            'fields': (('created', 'modified'),('follows',)),
             }
         )
     )
